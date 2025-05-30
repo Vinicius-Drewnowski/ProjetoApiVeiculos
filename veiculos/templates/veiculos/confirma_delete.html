@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirmação de Exclusão</title>
+</head>
+<body>
+    <h1>Tem certeza que deseja excluir o veículo abaixo?</h1>
+    <p><strong>{{ veiculo }}</strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar Exclusão</button>
+    </form>
+
+    <a href="/">Cancelar</a>
+</body>
+</html>

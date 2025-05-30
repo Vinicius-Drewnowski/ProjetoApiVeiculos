@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Veículos</title>
+</head>
+<body>
+    <h1>Filtrar Veículos</h1>
+
+<div style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
+        <form method="get">
+            <label for="marca">Marca:</label>
+            <select name="marca" id="marca">
+                <option value="">--Selecione--</option>
+                {% for marca in marcas %}
+                    <option value="{{ marca }}">{{ marca }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filtrar por Marca</button>
+        </form>
+
+        <form method="get">
+            <label for="modelo">Modelo:</label>
+            <select name="modelo" id="modelo">
+                <option value="">--Selecione--</option>
+                {% for modelo in modelos %}
+                    <option value="{{ modelo }}">{{ modelo }}</option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filtrar por Modelo</button>
+        </form>
+
+        <div style="margin-top: 10px;">
+            <a href="/api/veiculos/" style="text-decoration: none; padding: 6px 12px; background-color: #f0f0f0; border: 1px solid #ccc; border-radius: 4px;">
+                Ver API de Veículos
+            </a>
+        </div>
+    </div>
+
+<h2>Resultado:</h2>
+<table border="1" cellpadding="8" cellspacing="0">
+    <thead>
+        <tr>
+            <th>Marca</th>
+            <th>Modelo</th>
+            <th>Versão</th>
+            <th>Ano</th>
+            <th>Cor</th>
+            <th>Usuário</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for veiculo in veiculos %}
+            <tr>
+                <td>{{ veiculo.marca }}</td>
+                <td>{{ veiculo.modelo }}</td>
+                <td>{{ veiculo.versao }}</td>
+                <td>{{ veiculo.ano }}</td>
+                <td>{{ veiculo.cor }}</td>
+                <td>{{ veiculo.usuario }}</td>
+                <td>
+                    <a href="{% url 'editar_veiculo' veiculo.id %}">Editar</a> |
+                    <a href="{% url 'deletar_veiculo' veiculo.id %}">Excluir</a>
+                </td>
+            </tr>
+        {% empty %}
+            <tr>
+                <td colspan="7">Nenhum veículo encontrado.</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>
+</body>
+<p><a href="{% url 'grafico_veiculos_por_marca' %}">Ver Gráfico de Veículos por Marca</a></p>
+
+</html>
